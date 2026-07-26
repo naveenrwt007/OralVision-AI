@@ -1,0 +1,16 @@
+{
+  "report_id": "ORAL-20260725-388DD201",
+  "generated_at": "2026-07-25T17:06:34.073373",
+  "patient": {
+    "name": "Naveen Singh Rawat",
+    "age": "20",
+    "gender": "Male",
+    "phone": "7464891475",
+    "patient_id": "6a649cb4bcb5d8179c1ae78d",
+    "referred_by": ""
+  },
+  "prediction": "NON CANCER",
+  "confidence_percent": 83.73,
+  "verification_url": "http://127.0.0.1:8000/api/v1/reports/ORAL-20260725-388DD201/verify",
+  "pdf_filename": "ORAL-20260725-388DD201.pdf"
+}

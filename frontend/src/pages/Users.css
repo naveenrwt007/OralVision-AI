@@ -1,0 +1,188 @@
+.ov-users-page {
+  position: relative;
+}
+
+.ov-users-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.ov-users-summary article {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-solid);
+  box-shadow: var(--shadow-small);
+}
+
+.ov-users-summary span,
+.ov-users-summary small {
+  display: block;
+  color: var(--text-muted);
+}
+
+.ov-users-summary strong {
+  display: block;
+  margin: 8px 0 4px;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+}
+
+.ov-users-panel {
+  overflow: hidden;
+}
+
+.ov-users-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ov-users-toolbar h2,
+.ov-users-toolbar p {
+  margin: 0;
+}
+
+.ov-users-toolbar p {
+  margin-top: 5px;
+  color: var(--text-muted);
+  font-size: 0.84rem;
+}
+
+.ov-users-toolbar input {
+  width: min(360px, 100%);
+  min-height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 0 13px;
+  background: var(--surface-solid);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.ov-role-badge,
+.ov-status-active {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 9px;
+  font-size: 0.73rem;
+  font-weight: 800;
+}
+
+.ov-role-badge {
+  color: #0d7f78;
+  background: rgba(13, 148, 136, 0.11);
+  text-transform: capitalize;
+}
+
+.ov-status-active {
+  color: #147a50;
+  background: rgba(34, 160, 107, 0.11);
+}
+
+.ov-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(1, 20, 20, 0.68);
+  backdrop-filter: blur(6px);
+}
+
+.ov-user-modal {
+  width: min(520px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface-solid);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+}
+
+.ov-modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.ov-modal-header span {
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ov-modal-header h2 {
+  margin: 6px 0 5px;
+  color: var(--text-primary);
+}
+
+.ov-modal-header p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.ov-modal-header > button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+
+.ov-user-modal label {
+  display: grid;
+  gap: 7px;
+  margin-top: 14px;
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.ov-user-modal input,
+.ov-user-modal select {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0 13px;
+  background: var(--surface-solid);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.ov-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+@media (max-width: 800px) {
+  .ov-users-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .ov-users-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ov-users-toolbar input {
+    width: 100%;
+  }
+}

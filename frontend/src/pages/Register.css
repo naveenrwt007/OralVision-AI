@@ -1,0 +1,47 @@
+.register-card {
+  max-width: 520px;
+}
+
+.register-page .login-form-panel {
+  overflow-y: auto;
+  padding-top: 42px;
+  padding-bottom: 42px;
+}
+
+.register-success {
+  padding: 12px 14px;
+  border: 1px solid rgba(34, 160, 107, 0.25);
+  border-radius: 10px;
+  background: rgba(34, 160, 107, 0.08);
+  color: #147a50;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.auth-switch {
+  margin: 2px 0 0;
+  text-align: center;
+  color: #6a7f7e;
+  font-size: 0.86rem;
+}
+
+.auth-switch a {
+  color: #0d7f78;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+.register-page select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #c8d7d6;
+  border-radius: 10px;
+  padding: 0 14px;
+  background: #fff;
+  color: #173837;
+  font: inherit;
+}

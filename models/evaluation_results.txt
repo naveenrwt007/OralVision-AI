@@ -1,0 +1,11 @@
+
+MODEL EVALUATION SUMMARY
+========================
+
+Test Accuracy       : 87.10%
+Weighted Precision  : 0.8718
+Weighted Recall     : 0.8710
+Weighted F1-score   : 0.8710
+Cancer Sensitivity  : 0.8542
+Cancer Specificity  : 0.8889
+ROC-AUC             : 0.9292

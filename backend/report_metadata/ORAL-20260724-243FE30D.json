@@ -1,0 +1,16 @@
+{
+  "report_id": "ORAL-20260724-243FE30D",
+  "generated_at": "2026-07-24T16:23:03.288329",
+  "patient": {
+    "name": "bb",
+    "age": "16",
+    "gender": "Female",
+    "phone": "9849494546",
+    "patient_id": "6a6343f9449cfba73c5d9211",
+    "referred_by": ""
+  },
+  "prediction": "CANCER",
+  "confidence_percent": 77.93,
+  "verification_url": "http://127.0.0.1:8000/api/v1/reports/ORAL-20260724-243FE30D/verify",
+  "pdf_filename": "ORAL-20260724-243FE30D.pdf"
+}

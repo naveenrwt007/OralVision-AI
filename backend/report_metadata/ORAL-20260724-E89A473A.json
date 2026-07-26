@@ -1,0 +1,16 @@
+{
+  "report_id": "ORAL-20260724-E89A473A",
+  "generated_at": "2026-07-24T16:10:21.216134",
+  "patient": {
+    "name": "Aw",
+    "age": "12",
+    "gender": "Female",
+    "phone": "9834567890",
+    "patient_id": "6a6341030ba71b8a09121139",
+    "referred_by": ""
+  },
+  "prediction": "CANCER",
+  "confidence_percent": 89.23,
+  "verification_url": "http://127.0.0.1:8000/api/v1/reports/ORAL-20260724-E89A473A/verify",
+  "pdf_filename": "ORAL-20260724-E89A473A.pdf"
+}

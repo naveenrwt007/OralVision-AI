@@ -1,0 +1,16 @@
+{
+  "report_id": "ORAL-20260720-015C81E4",
+  "generated_at": "2026-07-20T12:48:29.677567",
+  "patient": {
+    "name": "naveen",
+    "age": "",
+    "gender": "",
+    "phone": "",
+    "patient_id": "",
+    "referred_by": ""
+  },
+  "prediction": "NON CANCER",
+  "confidence_percent": 73.11,
+  "verification_url": "http://127.0.0.1:8000/api/v1/reports/ORAL-20260720-015C81E4/verify",
+  "pdf_filename": "ORAL-20260720-015C81E4.pdf"
+}

@@ -1,0 +1,16 @@
+{
+  "report_id": "ORAL-20260726-244BB822",
+  "generated_at": "2026-07-26T00:26:41.311359",
+  "patient": {
+    "name": "Ambika",
+    "age": "15",
+    "gender": "Female",
+    "phone": "65465465545",
+    "patient_id": "6a6506bf8a2cf407a316b82c",
+    "referred_by": ""
+  },
+  "prediction": "NON CANCER",
+  "confidence_percent": 97.54,
+  "verification_url": "http://127.0.0.1:8000/api/v1/reports/ORAL-20260726-244BB822/verify",
+  "pdf_filename": "ORAL-20260726-244BB822.pdf"
+}
