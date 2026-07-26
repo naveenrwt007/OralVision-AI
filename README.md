@@ -169,16 +169,35 @@ Generate PDF Report
 
 # 📷 Screenshots
 
-> Add screenshots here
+## 🔐 Login
 
-- Login
-- Dashboard
-- Patient Management
-- AI Screening
-- Grad-CAM Result
-- Patient History
-- Reports
-- Analytics
+<p align="center">
+<img src="screenshots/login.png" width="900">
+</p>
+
+---
+
+## 📊 Dashboard
+
+<p align="center">
+<img src="screenshots/dashboard.png" width="900">
+</p>
+
+---
+
+## 👨‍⚕️ Patient Management
+
+<p align="center">
+<img src="screenshots/patient-history.png" width="900">
+</p>
+
+---
+
+## 📈 Analytics Dashboard
+
+<p align="center">
+<img src="screenshots/analytics.png" width="900">
+</p>
 
 ---
 
@@ -187,7 +206,7 @@ Generate PDF Report
 ## Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/OralVision-AI.git
+git clone https://github.com/naveenrwt007/OralVision-AI.git
 ```
 
 ### Backend
@@ -266,7 +285,7 @@ GitHub:
 https://github.com/naveenrwt007
 
 LinkedIn:
-(Add your LinkedIn)
+https://www.linkedin.com/in/naveen-singh-rawat-7b546b214
 
 ---
 
