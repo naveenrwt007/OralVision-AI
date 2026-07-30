@@ -15,6 +15,10 @@ from app.core.database import check_database_connection
 from app.core.startup import create_default_admin
 from app.services.model_loader import DEVICE, MODEL
 
+import bcrypt
+
+print("Installed bcrypt version:", bcrypt.__version__)
+print("Installed bcrypt path:", bcrypt.__file__)
 
 app = FastAPI(
     title="OralVision API",
