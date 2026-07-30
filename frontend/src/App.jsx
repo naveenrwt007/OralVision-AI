@@ -34,7 +34,8 @@ import useAuth from "./hooks/useAuth";
 import Login from "./pages/Login";
 import Unauthorized from "./pages/Unauthorized";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
 
 const SCREENING_API =
   `${API_BASE_URL}/api/v1/screening/predict`;
