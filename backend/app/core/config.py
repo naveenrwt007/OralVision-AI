@@ -41,7 +41,7 @@ if not MONGODB_URL:
 # ---------------------------------
 
 MODEL_PATH = (
-    PROJECT_ROOT
+    BACKEND_DIR
     / "models"
     / "efficientnet_b0_oral_cancer.pth"
 )

@@ -1,0 +1,12 @@
+*.pth
+!models/efficientnet_b0_oral_cancer.pth
+
+__pycache__/
+*.pyc
+venv/
+.env
+
+uploads/
+outputs/
+generated_reports/
+report_metadata/
