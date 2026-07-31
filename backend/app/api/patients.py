@@ -1,4 +1,14 @@
-from fastapi import APIRouter, HTTPException, Query, status
+from typing import Any
+
+from fastapi import (
+    APIRouter,
+    Depends,
+    HTTPException,
+    Query,
+    status,
+)
+
+from app.core.dependencies import get_current_technician
 
 from app.schemas.patient import (
     PatientCreate,
@@ -24,8 +34,11 @@ router = APIRouter(
     response_model=PatientResponse,
     status_code=status.HTTP_201_CREATED,
 )
-async def create_patient(payload: PatientCreate):
-    patient = await create_patient_record(payload)
+async def create_patient(
+    payload: PatientCreate,
+    current_user: dict[str, Any]=Depends(get_current_technician),
+):
+    patient = await create_patient_record(payload,current_user)
 
     if not patient:
         raise HTTPException(
@@ -44,8 +57,12 @@ async def get_patients(
     search: str | None = Query(default=None),
     limit: int = Query(default=50, ge=1, le=200),
     skip: int = Query(default=0, ge=0),
+    current_user: dict[str, Any] = Depends(
+        get_current_technician
+    ),
 ):
     return await list_patient_records(
+        current_user=current_user,
         search=search,
         limit=limit,
         skip=skip,
@@ -56,8 +73,11 @@ async def get_patients(
     "/{patient_id}",
     response_model=PatientResponse,
 )
-async def get_patient(patient_id: str):
-    patient = await get_patient_by_id(patient_id)
+async def get_patient(
+    patient_id: str,
+    current_user: dict[str, Any] = Depends(get_current_technician),
+):
+    patient = await get_patient_by_id(patient_id, current_user)
 
     if not patient:
         raise HTTPException(
@@ -75,10 +95,12 @@ async def get_patient(patient_id: str):
 async def update_patient(
     patient_id: str,
     payload: PatientUpdate,
+    current_user: dict[str, Any] = Depends(get_current_technician),
 ):
     patient = await update_patient_record(
         patient_id,
         payload,
+        current_user,
     )
 
     if not patient:
@@ -90,19 +112,17 @@ async def update_patient(
     return patient
 
 
-@router.delete(
-    "/{patient_id}",
-)
-async def delete_patient(patient_id: str):
-    deleted = await delete_patient_record(patient_id)
-
-    if not deleted:
-        raise HTTPException(
-            status_code=404,
-            detail="Patient not found.",
-        )
-
-    return {
-        "message": "Patient deleted successfully.",
-        "patient_id": patient_id,
-    }
+async def get_patients(
+    search: str | None = Query(default=None),
+    limit: int = Query(default=50, ge=1, le=200),
+    skip: int = Query(default=0, ge=0),
+    current_user: dict[str, Any] = Depends(
+        get_current_technician
+    ),
+):
+    return await list_patient_records(
+        current_user=current_user,
+        search=search,
+        limit=limit,
+        skip=skip,
+    )

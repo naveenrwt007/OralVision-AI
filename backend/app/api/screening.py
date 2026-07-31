@@ -78,8 +78,23 @@ async def predict_oral_image(
 
     patient_object_id = ObjectId(patient_id)
 
+    current_user_id = str(
+        current_user.get("_id", "")
+    )
+
+    current_user_role = str(
+        current_user.get("role", "")
+    ).strip().lower()
+
+    patient_query = {
+        "_id": patient_object_id
+    }
+
+    if current_user_role != "admin":
+        patient_query["created_by"] = current_user_id
+
     patient = await patients_collection.find_one(
-        {"_id": patient_object_id}
+        patient_query
     )
 
     if patient is None:
@@ -144,6 +159,7 @@ async def predict_oral_image(
             "patient_id": patient_object_id,
             "patient_name": patient_name,
 
+            "owner_id": patient.get("created_by", current_user_id),
             "prediction": screening_result.get(
                 "prediction"
             ),
@@ -197,7 +213,7 @@ async def predict_oral_image(
         )
 
         await patients_collection.update_one(
-            {"_id": patient_object_id},
+            patient_query,
             {
                 "$inc": {
                     "total_screenings": 1,
