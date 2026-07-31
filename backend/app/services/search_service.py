@@ -1,3 +1,5 @@
+from typing import Any
+
 from bson import ObjectId
 
 from app.core.database import (
@@ -31,27 +33,44 @@ def serialize_mongo(document):
     return document
 
 
-async def global_search_records(query: str):
+async def global_search_records(
+    query: str,
+    current_user: dict[str, Any],
+):
     regex = {
         "$regex": query,
         "$options": "i",
     }
 
+    user_id = str(current_user.get("_id", ""))
+
+    user_role = str(
+        current_user.get("role", "")
+    ).strip().lower()
+
     # -------------------------
     # Patients
     # -------------------------
+    patient_query = {
+        "$or": [
+            {"patient_name": regex},
+            {"phone": regex},
+            {"email": regex},
+            {"doctor_name": regex},
+            {"hospital_name": regex},
+        ]
+    }
+
+    if user_role != "admin":
+        patient_query = {
+            "$and": [
+                {"created_by": user_id},
+                patient_query,
+            ]
+        }
+
     patient_cursor = (
-        patients_collection.find(
-            {
-                "$or": [
-                    {"patient_name": regex},
-                    {"phone": regex},
-                    {"email": regex},
-                    {"doctor_name": regex},
-                    {"hospital_name": regex},
-                ]
-            }
-        )
+        patients_collection.find(patient_query)
         .limit(20)
     )
 
@@ -60,16 +79,24 @@ async def global_search_records(query: str):
     # -------------------------
     # Reports
     # -------------------------
+    report_query = {
+        "$or": [
+            {"report_id": regex},
+            {"patient_name": regex},
+            {"prediction": regex},
+        ]
+    }
+
+    if user_role != "admin":
+        report_query = {
+            "$and": [
+                {"owner_id": user_id},
+                report_query,
+            ]
+        }
+
     report_cursor = (
-        reports_collection.find(
-            {
-                "$or": [
-                    {"report_id": regex},
-                    {"patient_name": regex},
-                    {"prediction": regex},
-                ]
-            }
-        )
+        reports_collection.find(report_query)
         .limit(20)
     )
 
@@ -78,21 +105,28 @@ async def global_search_records(query: str):
     # -------------------------
     # Screenings
     # -------------------------
+    screening_query = {
+        "$or": [
+            {"prediction": regex},
+            {"patient_name": regex},
+        ]
+    }
+
+    if user_role != "admin":
+        screening_query = {
+            "$and": [
+                {"owner_id": user_id},
+                screening_query,
+            ]
+        }
+
     screening_cursor = (
-        screenings_collection.find(
-            {
-                "$or": [
-                    {"prediction": regex},
-                    {"patient_name": regex},
-                ]
-            }
-        )
+        screenings_collection.find(screening_query)
         .limit(20)
     )
 
     screenings = await screening_cursor.to_list(length=20)
 
-    # Serialize all MongoDB documents
     reports = [
         serialize_mongo(report)
         for report in reports
