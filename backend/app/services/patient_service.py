@@ -75,7 +75,6 @@ async def create_patient_record(
 
     return serialize_patient(created_patient)
 
-
 async def list_patient_records(
     current_user: dict[str, Any],
     search: str | None = None,
@@ -138,7 +137,6 @@ async def get_patient_by_id(
 
     return serialize_patient(patient)
 
-
 async def update_patient_record(
     patient_id: str,
     payload: PatientUpdate,
@@ -186,56 +184,6 @@ async def update_patient_record(
     )
 
     return serialize_patient(updated_patient)
-
-
-async def update_patient_record(
-    patient_id: str,
-    payload: PatientUpdate,
-    current_user: dict[str, Any],
-) -> dict | None:
-    if not valid_object_id(patient_id):
-        return None
-
-    query = {
-        "_id": ObjectId(patient_id),
-        **patient_access_query(current_user),
-    }
-
-    update_data = payload.model_dump(
-        exclude_unset=True,
-        exclude_none=True,
-    )
-
-    if not update_data:
-        return await get_patient_by_id(
-            patient_id,
-            current_user,
-        )
-
-    # Ownership fields cannot be changed
-    update_data.pop("created_by", None)
-    update_data.pop("created_by_role", None)
-    update_data.pop("created_by_email", None)
-    update_data.pop("created_by_name", None)
-
-    update_data["updated_at"] = datetime.now(
-        timezone.utc
-    )
-
-    result = await patients_collection.update_one(
-        query,
-        {"$set": update_data},
-    )
-
-    if result.matched_count == 0:
-        return None
-
-    updated_patient = await patients_collection.find_one(
-        query
-    )
-
-    return serialize_patient(updated_patient)
-
 
 async def increment_patient_screening_count(
     patient_id: str,
@@ -255,7 +203,6 @@ async def increment_patient_screening_count(
 
     return result.matched_count == 1
 
-
 async def increment_patient_report_count(
     patient_id: str,
 ) -> bool:
@@ -274,7 +221,6 @@ async def increment_patient_report_count(
 
     return result.matched_count == 1
 
-
 async def create_patient_indexes() -> None:
     await patients_collection.create_index(
         [("patient_name", ASCENDING)]
@@ -291,3 +237,19 @@ async def create_patient_indexes() -> None:
     await patients_collection.create_index(
         [("created_at", DESCENDING)]
     )
+
+async def delete_patient_record(
+    patient_id: str,
+    current_user: dict[str, Any],
+) -> bool:
+    if not valid_object_id(patient_id):
+        return False
+
+    query = {
+        "_id": ObjectId(patient_id),
+        **patient_access_query(current_user),
+    }
+
+    result = await patients_collection.delete_one(query)
+
+    return result.deleted_count == 1
